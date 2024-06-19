@@ -57,3 +57,50 @@ class SistemReservasiRestoran:
             print('Reservasi berhasil diimpor dari CSV.')
         except FileNotFoundError:
             print('File CSV tidak ditemukan.')
+
+def main():
+    sistem = SistemReservasiRestoran()
+    while True:
+        print("\nSistem Reservasi Restoran")
+        print("1. Buat Reservasi")
+        print("2. Baca Reservasi")
+        print("3. Perbarui Reservasi")
+        print("4. Hapus Reservasi")
+        print("5. Urutkan Reservasi berdasarkan ID")
+        print("6. Cari Reservasi berdasarkan Nama")
+        print("7. Impor Reservasi dari CSV")
+        print("8. Keluar")
+        pilihan = input("Masukkan pilihan Anda: ")
+
+        if pilihan == '1':
+            id_reservasi = int(input("Masukkan ID Reservasi: "))
+            nama_pelanggan = input("Masukkan Nama Pelanggan: ")
+            nomor_meja = int(input("Masukkan Nomor Meja: "))
+            waktu_reservasi = input("Masukkan Waktu Reservasi: ")
+            sistem.buat_reservasi(id_reservasi, nama_pelanggan, nomor_meja, waktu_reservasi)
+        elif pilihan == '2':
+            sistem.baca_reservasi()
+        elif pilihan == '3':
+            id_reservasi = int(input("Masukkan ID Reservasi yang ingin diperbarui: "))
+            nama_pelanggan_baru = input("Masukkan Nama Pelanggan Baru: ")
+            nomor_meja_baru = int(input("Masukkan Nomor Meja Baru: "))
+            waktu_reservasi_baru = input("Masukkan Waktu Reservasi Baru: ")
+            sistem.perbarui_reservasi(id_reservasi, nama_pelanggan_baru, nomor_meja_baru, waktu_reservasi_baru)
+        elif pilihan == '4':
+            id_reservasi = int(input("Masukkan ID Reservasi yang ingin dihapus: "))
+            sistem.hapus_reservasi(id_reservasi)
+        elif pilihan == '5':
+            sistem.urutkan_reservasi_berdasarkan_id()
+        elif pilihan == '6':
+            nama_pelanggan = input("Masukkan Nama Pelanggan yang ingin dicari: ")
+            sistem.cari_reservasi_berdasarkan_nama(nama_pelanggan)
+        elif pilihan == '7':
+            nama_file = input("Masukkan nama file CSV: ")
+            sistem.impor_dari_csv(nama_file)
+        elif pilihan == '8':
+            break
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
+
+if __name__ == "__main__":
+    main()
