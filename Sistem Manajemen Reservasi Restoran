@@ -28,3 +28,32 @@ class SistemReservasiRestoran:
                 print('Reservasi berhasil diperbarui.')
                 return
         print('Reservasi tidak ditemukan.')
+
+    def hapus_reservasi(self, id_reservasi):
+        for reservasi in self.reservasi_list:
+            if reservasi.id_reservasi == id_reservasi:
+                self.reservasi_list.remove(reservasi)
+                print('Reservasi berhasil dihapus.')
+                return
+        print('Reservasi tidak ditemukan.')
+
+    def urutkan_reservasi_berdasarkan_id(self):
+        self.reservasi_list.sort(key=lambda x: x.id_reservasi)
+        print('Reservasi diurutkan berdasarkan ID.')
+
+    def cari_reservasi_berdasarkan_nama(self, nama_pelanggan):
+        for reservasi in self.reservasi_list:
+            if reservasi.nama_pelanggan.lower() == nama_pelanggan.lower():
+                print(f'ID: {reservasi.id_reservasi}, Nama: {reservasi.nama_pelanggan}, Meja: {reservasi.nomor_meja}, Waktu: {reservasi.waktu_reservasi}')
+                return
+        print('Reservasi tidak ditemukan.')
+
+    def impor_dari_csv(self, nama_file):
+        try:
+            with open(nama_file, mode='r') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    self.buat_reservasi(int(row['id_reservasi']), row['nama_pelanggan'], int(row['nomor_meja']), row['waktu_reservasi'])
+            print('Reservasi berhasil diimpor dari CSV.')
+        except FileNotFoundError:
+            print('File CSV tidak ditemukan.')
