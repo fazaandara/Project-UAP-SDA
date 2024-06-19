@@ -1,1 +1,30 @@
+import csv
 
+class Reservasi:
+    def __init__(self, id_reservasi, nama_pelanggan, nomor_meja, waktu_reservasi):
+        self.id_reservasi = id_reservasi
+        self.nama_pelanggan = nama_pelanggan
+        self.nomor_meja = nomor_meja
+        self.waktu_reservasi = waktu_reservasi
+
+class SistemReservasiRestoran:
+    def __init__(self):
+        self.reservasi_list = []
+
+    def buat_reservasi(self, id_reservasi, nama_pelanggan, nomor_meja, waktu_reservasi):
+        reservasi = Reservasi(id_reservasi, nama_pelanggan, nomor_meja, waktu_reservasi)
+        self.reservasi_list.append(reservasi)
+
+    def baca_reservasi(self):
+        for reservasi in self.reservasi_list:
+            print(f'ID: {reservasi.id_reservasi}, Nama: {reservasi.nama_pelanggan}, Meja: {reservasi.nomor_meja}, Waktu: {reservasi.waktu_reservasi}')
+
+    def perbarui_reservasi(self, id_reservasi, nama_pelanggan_baru, nomor_meja_baru, waktu_reservasi_baru):
+        for reservasi in self.reservasi_list:
+            if reservasi.id_reservasi == id_reservasi:
+                reservasi.nama_pelanggan = nama_pelanggan_baru
+                reservasi.nomor_meja = nomor_meja_baru
+                reservasi.waktu_reservasi = waktu_reservasi_baru
+                print('Reservasi berhasil diperbarui.')
+                return
+        print('Reservasi tidak ditemukan.')
